@@ -3,6 +3,7 @@ from model_utils.models import TimeStampedModel
 
 
 class SimpleNameModel(models.Model):
+
     name = models.CharField(max_length=128)
 
     class Meta:
@@ -13,6 +14,7 @@ class SimpleNameModel(models.Model):
 
 
 class Planet(TimeStampedModel, SimpleNameModel):
+    
     """ Planetas del universo de Star Wars """
 
     rotation_period = models.CharField(max_length=40, blank=True)
@@ -42,11 +44,32 @@ class People(TimeStampedModel, SimpleNameModel):
         (NA, 'N/A'),
     )
 
+    HAIR_COLOR_CHOICES = (
+    ('BLACK', 'black'),
+    ('BROWN', 'brown'),        
+    ('BLONDE', 'blonde'),
+    ('RED', 'red'),
+    ('WHITE', 'white'),
+    ('BALD', 'bald'),
+    )
+
+    EYE_COLOR_CHOICES = (
+    ('BLACK', 'black'),
+    ('BROWN', 'brown'),        
+    ('YELLOW', 'yellow'),
+    ('RED', 'red'),
+    ('GREEN', 'green'),
+    ('PURPLE', 'purple'),
+    ('UNKNOWN', 'unknown'),
+    )
+
     height = models.CharField(max_length=16, blank=True)
     mass = models.CharField(max_length=16, blank=True)
-    hair_color = models.CharField(max_length=32, blank=True)
+    # hair_color = models.CharField(max_length=32, blank=True)
+    hair_color = models.CharField(max_length=32, choices=HAIR_COLOR_CHOICES, blank=True)
     skin_color = models.CharField(max_length=32, blank=True)
-    eye_color = models.CharField(max_length=32, blank=True)
+    # eye_color = models.CharField(max_length=32, blank=True)
+    eye_color = models.CharField(max_length=32, choices=EYE_COLOR_CHOICES, blank=True)
     birth_year = models.CharField(max_length=16, blank=True)
     gender = models.CharField(max_length=64, choices=GENDER)
     home_world = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='inhabitants')
