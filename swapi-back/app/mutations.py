@@ -8,6 +8,7 @@ from .utils import generic_model_mutation_process
 
 class CreatePlanet(graphene.relay.ClientIDMutation):
     class Input:
+        
         id = graphene.ID(required=False)
         name = graphene.String(required=True)
         rotation_period = graphene.String(required=False)
