@@ -1,5 +1,4 @@
 def generic_model_mutation_process(model, data, id=None, commit=True):
-
     if id:
         item = model.objects.get(id=id)
         try:

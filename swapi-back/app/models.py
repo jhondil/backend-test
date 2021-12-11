@@ -74,6 +74,7 @@ class People(TimeStampedModel, SimpleNameModel):
     gender = models.CharField(max_length=64, choices=GENDER)
     home_world = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='inhabitants')
 
+
     class Meta:
         db_table = 'people'
         verbose_name_plural = 'people'
@@ -108,3 +109,7 @@ class Film(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+
+class People_film(People):
+        films = models.ManyToManyField(Film, related_name='film', blank=True)

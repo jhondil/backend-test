@@ -1,14 +1,14 @@
 import graphene
 from graphql_relay import from_global_id
 
-from .models import Planet
-from .types import PlanetType
+from .models import Planet, People
+from .types import PlanetType,PeopleType
 from .utils import generic_model_mutation_process
 
 
 class CreatePlanet(graphene.relay.ClientIDMutation):
     class Input:
-        
+
         id = graphene.ID(required=False)
         name = graphene.String(required=True)
         rotation_period = graphene.String(required=False)
@@ -34,3 +34,24 @@ class CreatePlanet(graphene.relay.ClientIDMutation):
         return CreatePlanet(planet=planet)
 
 
+class CreatePeople(graphene.Mutation):
+    people = graphene.Field(PeopleType)
+
+    class Arguments:
+        name= graphene.String()
+        height = graphene.String()
+        mass = graphene.String()
+        hair_color = graphene.String()
+        skin_color = graphene.String()
+        eye_color = graphene.String()
+        birth_year = graphene.String()
+        gender = graphene.String()
+        home_world_id = graphene.Int()
+
+
+    def mutate(self, info, name, height,mass,hair_color,skin_color,eye_color,birth_year,gender,home_world_id):
+        p = People(name=name, height=height,mass=mass,hair_color=hair_color,skin_color=skin_color,eye_color=eye_color,birth_year=birth_year,gender=gender)
+        hw = Planet.objects.get(id=home_world_id)
+        p.home_world = hw
+        p.save()
+        return CreatePeople(people=p)
