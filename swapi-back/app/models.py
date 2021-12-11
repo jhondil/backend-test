@@ -112,4 +112,4 @@ class Film(TimeStampedModel):
 
 
 class People_film(People):
-        films = models.ManyToManyField(Film, related_name='film', blank=True)
+        films = models.ManyToManyField(Film)

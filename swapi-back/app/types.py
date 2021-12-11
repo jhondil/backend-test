@@ -1,7 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from .models import Planet, People, Film, Director, Producer
+from .models import  Planet, People, Film, Director, Producer,People_film
 
 
 class PlanetType(DjangoObjectType):
@@ -45,3 +45,14 @@ class FilmType(DjangoObjectType):
             'episode_id': ['exact'],
             'release_date': ['exact']
         }
+
+
+class PeopleFilmType(DjangoObjectType):
+    # gender = graphene.Enum('PeopleGenderEnum', People.GENDER)
+
+    class Meta:
+        model = People_film
+        interfaces = (graphene.relay.Node,)
+        filter_fields = {'name': ['iexact', 'icontains', 'contains', 'exact'], 'gender': ['exact']}
+
+

@@ -25,6 +25,9 @@ class Query(graphene.ObjectType):
     producer = graphene.relay.Node.Field(ProducerType)
     all_producers = DjangoFilterConnectionField(ProducerType)
 
+    people_films = graphene.relay.Node.Field(PeopleFilmType)
+    all_people_films = DjangoFilterConnectionField(PeopleFilmType)
+
 
 class Mutation(graphene.ObjectType):
     create_planet = CreatePlanet.Field()
