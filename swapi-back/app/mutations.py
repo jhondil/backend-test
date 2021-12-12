@@ -34,39 +34,32 @@ class CreatePlanet(graphene.relay.ClientIDMutation):
         return CreatePlanet(planet=planet)
 
 
-class CreatePeople(graphene.Mutation):
-    people = graphene.Field(PeopleFilmType)
+# class CreatePeople(graphene.Mutation):
+#     people = graphene.Field(PeopleFilmType)
 
-    class Arguments:
+#     class Arguments:
 
-        name = graphene.String()
-        height = graphene.String()
-        mass = graphene.String()
-        hair_color = graphene.String()
-        skin_color = graphene.String()
-        eye_color = graphene.String()
-        birth_year = graphene.String()
-        gender = graphene.String()
-        home_world_id = graphene.Int()
-        people_film_id = graphene.Int()
+#         name = graphene.String()
+#         height = graphene.String()
+#         mass = graphene.String()
+#         hair_color = graphene.String()
+#         skin_color = graphene.String()
+#         eye_color = graphene.String()
+#         birth_year = graphene.String()
+#         gender = graphene.String()
+#         home_world_id = graphene.Int()
+#         people_film_id = graphene.Int()
 
-    def mutate(self, info,  name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, home_world_id, people_film_id):
-        p = People(name=name, height=height, mass=mass, hair_color=hair_color,
-                   skin_color=skin_color, eye_color=eye_color, birth_year=birth_year, gender=gender)
-        hw = Planet.objects.get(id=home_world_id)
-        pf = Film.objects.get(id=people_film_id)
-        p.home_world = hw
-        p.save()
-        p.films.set([pf])
+#     def mutate(self, info,  name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, home_world_id, people_film_id):
+#         p = People(name=name, height=height, mass=mass, hair_color=hair_color,
+#                    skin_color=skin_color, eye_color=eye_color, birth_year=birth_year, gender=gender)
+#         hw = Planet.objects.get(id=home_world_id)
+#         pf = Film.objects.get(id=people_film_id)
+#         p.home_world = hw
+#         p.save()
+#         p.films.set([pf])
 
-        return CreatePeople(people=p)
-
-
-###################################################################################
-###################################################################################
-###################################################################################
-###################################################################################
-###################################################################################
+#         return CreatePeople(people=p)
 
 
 class FilmInput(graphene.InputObjectType):
@@ -86,7 +79,7 @@ class PeopleFilmInput(graphene.InputObjectType):
     birth_year = graphene.String()
     gender = graphene.String()
     home_world_id = graphene.Int()
-    people_film = graphene.List(FilmInput)
+    pp_film = graphene.List(FilmInput)
 
 
 class CreateFilm(graphene.Mutation):
@@ -104,62 +97,53 @@ class CreateFilm(graphene.Mutation):
         film_instance.save()
         return CreateFilm(film=film_instance)
 
-####################
-
 
 class CreatePeopleFilm(graphene.Mutation):
     class Arguments:
         input = PeopleFilmInput(required=True)
 
-    pf = graphene.Field(PeopleFilmType)
+    PeopleFilms = graphene.Field(PeopleFilmType)
 
     @staticmethod
     def mutate(root, info, input=None):
 
-        fimls = []
-        for film_input in input.people_film:
-            filmm = Film.objects.get(id=film_input.id)
-            if filmm is None:
-                return CreatePeopleFilm(pf=None)
-            fimls.append(filmm)
-        fil_people = People_film(
+        filmss = []
+        for f_input in input.pp_film:
+            f = Film.objects.get(id=f_input.id)
+            if f is None:
+                return CreatePeopleFilm(movie=None)
+            filmss.append(f)
+        pf = People_film(
             name=input.name,
             height=input.height,
             home_world_id=input.home_world_id
         )
-        fil_people.save()
-        fil_people.people_film.set(fimls)
-        return CreatePeopleFilm(people=fil_people)
+        pf.save()
+        pf.films.set(filmss)
+        return CreatePeopleFilm(PeopleFilms=pf)
 
 
-# class CreatePeopleFilm(graphene.Mutation):
-#     class Arguments:
-#         input = PeopleFilmInput(required=True)
+class UpdatePeople(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        input = PeopleFilmInput(required=True)
 
+    movie = graphene.Field(PeopleFilmType)
 
-#     film = graphene.Field(FilmType)
+    @staticmethod
+    def mutate(root, info, id, input=None):
 
-#     @staticmethod
-#     def mutate(root, info, input=None):
-
-#         fielms = []
-#         for f in input.fielms:
-#           fi = Film.objects.get(id=f.id)
-#           if fi is None:
-#             return CreatePeopleFilm(ok=False, movie=None)
-#           fielms.append(fi)
-#         people_instance = People_film(
-#             name= input.name,
-#             height = input.height,
-#             mass = input.mass,
-#             hair_color = input.hair_color,
-#             skin_color = input.skin_color,
-#             eye_color = input.eye_color,
-#             birth_year = input.birth_year,
-#             gender = input.gender,
-#             home_world_id = input.home_world_id
-
-#           )
-#         people_instance.save()
-#         people_instance.fielms.set(fielms)
-#         return CreatePeopleFilm(film=people_instance)
+        movie_instance = People_film.objects.get(pk=id)
+        if movie_instance:
+            actors = []
+            for actor_input in input.pp_film:
+                actor = Film.objects.get(pk=actor_input.id)
+                if actor is None:
+                    return UpdatePeople(movie=None)
+                actors.append(actor)
+            movie_instance.name = input.name
+            movie_instance.height = input.name
+            movie_instance.save()
+            movie_instance.films.set(actors)
+            return UpdatePeople(movie=movie_instance)
+        return UpdatePeople(movie=None)

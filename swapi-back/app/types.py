@@ -48,7 +48,7 @@ class FilmType(DjangoObjectType):
 
 
 class PeopleFilmType(DjangoObjectType):
-    # gender = graphene.Enum('PeopleGenderEnum', People.GENDER)
+    gender = graphene.Enum('PeopleGenderEnum', People.GENDER)
 
     class Meta:
         model = People_film

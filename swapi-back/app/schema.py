@@ -31,6 +31,7 @@ class Query(graphene.ObjectType):
 
 class Mutation(graphene.ObjectType):
     create_planet = CreatePlanet.Field()
-    create_people = CreatePeople.Field()
+    # create_people = CreatePeople.Field()
     create_film = CreateFilm.Field()
     Create_peopleFilm = CreatePeopleFilm.Field()
+    update_peopleFilm = UpdatePeople.Field()
