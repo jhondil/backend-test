@@ -128,22 +128,22 @@ class UpdatePeople(graphene.Mutation):
         id = graphene.Int(required=True)
         input = PeopleFilmInput(required=True)
 
-    movie = graphene.Field(PeopleFilmType)
+    People = graphene.Field(PeopleFilmType)
 
     @staticmethod
     def mutate(root, info, id, input=None):
 
-        movie_instance = People_film.objects.get(pk=id)
-        if movie_instance:
-            actors = []
-            for actor_input in input.pp_film:
-                actor = Film.objects.get(pk=actor_input.id)
-                if actor is None:
+        p = People_film.objects.get(pk=id)
+        if p:
+            filmss = []
+            for f_input in input.pp_film:
+                f = Film.objects.get(pk=f_input.id)
+                if f is None:
                     return UpdatePeople(movie=None)
-                actors.append(actor)
-            movie_instance.name = input.name
-            movie_instance.height = input.name
-            movie_instance.save()
-            movie_instance.films.set(actors)
-            return UpdatePeople(movie=movie_instance)
+                filmss.append(f)
+            p.name = input.name
+            p.height = input.name
+            p.save()
+            p.films.set(filmss)
+            return UpdatePeople(People=p)
         return UpdatePeople(movie=None)
