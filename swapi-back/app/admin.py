@@ -1,9 +1,17 @@
 from django.contrib import admin
 
-from app import models
 
-admin.site.register(models.Director)
-admin.site.register(models.Film)
-admin.site.register(models.People)
-admin.site.register(models.Planet)
-admin.site.register(models.Producer)
+from .models import *
+
+
+admin.site.register(Director)
+admin.site.register(Film)
+admin.site.register(People)
+admin.site.register(Planet)
+admin.site.register(Producer)
+
+class Peoplefilm(admin.ModelAdmin):
+    list_display=('id', 'name')
+
+admin.site.register(People_film, Peoplefilm)
+
