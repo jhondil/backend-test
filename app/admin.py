@@ -11,7 +11,7 @@ admin.site.register(Planet)
 admin.site.register(Producer)
 
 class Peoplefilm(admin.ModelAdmin):
-    list_display=('id', 'name')
+    list_display=('id', 'name','hair_color')
 
 admin.site.register(People_film, Peoplefilm)
 
