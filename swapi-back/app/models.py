@@ -96,13 +96,13 @@ class Producer(SimpleNameModel):
 
 class Film(TimeStampedModel):
     title = models.CharField(max_length=100)
-    episode_id = models.PositiveSmallIntegerField()  # TODO: Agregar choices
+    episode_id = models.PositiveSmallIntegerField(null=True)  # TODO: Agregar choices
     opening_crawl = models.TextField(max_length=1000)
-    release_date = models.DateField()
-    director = models.ForeignKey(Director, on_delete=models.CASCADE, related_name='films')
-    producer = models.ManyToManyField(Producer, related_name='films')
-    characters = models.ManyToManyField(People, related_name='films', blank=True)
-    planets = models.ManyToManyField(Planet, related_name='films', blank=True)
+    release_date = models.DateField(blank=True,null=True)
+    director = models.ForeignKey(Director, on_delete=models.CASCADE, related_name='films', blank=True, null=True)
+    producer = models.ManyToManyField(Producer, related_name='films', blank=True,null=True)
+    characters = models.ManyToManyField(People, related_name='films', blank=True, null=True)
+    planets = models.ManyToManyField(Planet, related_name='films', blank=True, null=True)
 
     class Meta:
         db_table = 'film'
