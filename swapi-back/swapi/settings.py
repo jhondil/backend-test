@@ -1,13 +1,16 @@
 import os
 
 from dotenv import load_dotenv
+import dj_database_url
+from decouple import config
 
 load_dotenv()  # Load env variables
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'Please-generate-a-private key')  # TODO: Generar un key seguro
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']  # TODO: dejar solo la URL donde va a estar disponible
+DEBUG = False
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']  # TODO: dejar solo la URL donde va a estar disponible
+ALLOWED_HOSTS = ['*']  # TODO: dejar solo la URL donde va a estar disponible
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -33,6 +36,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'swapi.urls'
@@ -58,10 +62,20 @@ GRAPHENE = {
 
 WSGI_APPLICATION = 'swapi.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': dj_database_url.config(
+            default = config('DATABASE_URL')
+        )
+       
     }
 }
 
@@ -95,3 +109,5 @@ CORS_ORIGIN_WHITELIST = (
     'http://127.0.0.1',
     'http://localhost',
 )
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
