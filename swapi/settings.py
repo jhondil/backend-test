@@ -1,8 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-import dj_database_url
-from decouple import config
+
 
 load_dotenv()  # Load env variables
 
@@ -69,15 +68,15 @@ WSGI_APPLICATION = 'swapi.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
+import dj_database_url
+from decouple import config
 
 DATABASES = {
-    'default': {
-        'ENGINE': dj_database_url.config(
-            default = config('DATABASE_URL')
+    'default': dj_database_url.config(
+            default=config('DATABASE_URL')
         )
        
-    }
+
 }
 
 AUTH_PASSWORD_VALIDATORS = [

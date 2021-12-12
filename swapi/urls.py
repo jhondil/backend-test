@@ -19,8 +19,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import RedirectView
 from graphene_django.views import GraphQLView
 
-# from django.config import settings
-# from django.config.urls.static import static
+from django.config import settings
+from django.config.urls.static import static
 
 from .schema import schema
 
@@ -29,4 +29,4 @@ urlpatterns = [
     path('graphql/', csrf_exempt(GraphQLView.as_view(schema=schema))),
     path('explore/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=True))),
     path('admin/', admin.site.urls),
-] 
+] +  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
