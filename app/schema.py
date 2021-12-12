@@ -6,7 +6,7 @@ from graphql_relay.node.node import from_global_id
 
 from .models import Planet, People, Film, Director, Producer
 from .mutations import *
-from .types import PlanetType, PeopleType, FilmType, DirectorType, ProducerType
+from .types import PlanetType, PeopleType, FilmType, DirectorType, ProducerType,PeopleFilter
 
 
 class Query(graphene.ObjectType):
@@ -14,7 +14,9 @@ class Query(graphene.ObjectType):
     all_planets = DjangoFilterConnectionField(PlanetType)
 
     people = graphene.relay.Node.Field(PeopleType)
-    all_people = DjangoFilterConnectionField(PeopleType)
+    all_people = DjangoFilterConnectionField(PeopleType, filterset_class=PeopleFilter)
+
+
 
     film = graphene.relay.Node.Field(FilmType)
     all_films = DjangoFilterConnectionField(FilmType)
