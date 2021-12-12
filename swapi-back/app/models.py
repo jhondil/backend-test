@@ -100,9 +100,9 @@ class Film(TimeStampedModel):
     opening_crawl = models.TextField(max_length=1000)
     release_date = models.DateField(blank=True,null=True)
     director = models.ForeignKey(Director, on_delete=models.CASCADE, related_name='films', blank=True, null=True)
-    producer = models.ManyToManyField(Producer, related_name='films', blank=True,null=True)
-    characters = models.ManyToManyField(People, related_name='films', blank=True, null=True)
-    planets = models.ManyToManyField(Planet, related_name='films', blank=True, null=True)
+    producer = models.ManyToManyField(Producer, related_name='films', blank=True)
+    characters = models.ManyToManyField(People, related_name='films', blank=True )
+    planets = models.ManyToManyField(Planet, related_name='films', blank=True )
 
     class Meta:
         db_table = 'film'
