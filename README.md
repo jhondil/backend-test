@@ -44,7 +44,9 @@ source tutorial-env/bin/activate
 
 
 - Locate us in the following file swap / settings.py
+```
 		- DEBUG = True  switch to  DEBUG = False
+```
 - uncomment lines 67 to 72
 ```
 		DATABASES = {
