@@ -1,7 +1,6 @@
 def print_numbers():
-    for i in range(0,101):
-        
-        if i and  i % 2 == 0:
+    for i in range(0, 101):
+        if i and i % 2 == 0:
             print(i, 'Buzz')
         elif i % 5 == 0:
             print(i, 'Buzz')

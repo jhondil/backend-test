@@ -22,7 +22,7 @@ def List_pokemon(first_pokemon, pokemon):
         return pokemon
     else:
         option_pokemon = (List_pokemon(first_pokemon, list(pokemon) + [poke])
-                        for poke in list_pokem)
+                          for poke in list_pokem)
         maxx_pokemon = max(option_pokemon, key=len)
         # print('listta de pokemones: %r' % maxx_pokemon)
         return maxx_pokemon
@@ -32,19 +32,24 @@ def pokemons(list_pokemon):
 
     first_pokemon = order_pokemon(list_pokemon)
     return max(
-        (List_pokemon(first_pokemon, [word]) for word in list_pokemon), key=len)
+        (List_pokemon(first_pokemon, [word])
+         for word in list_pokemon), key=len)
 
 
 if __name__ == '__main__':
 
     pokemon_li = '''audino bagon baltoy banette bidoof braviary bronzor carracosta charmeleon
-                        cresselia croagunk darmanitan deino emboar emolga exeggcute gabite girafarig
-                        gulpin haxorus heatmor heatran ivysaur jellicent jumpluff kangaskhan kricketune
-                        landorus ledyba loudred lumineon lunatone machamp magnezone mamoswine
-                        nosepass petilil pidgeotto pikachu pinsir poliwrath poochyena porygon2 porygonz
-                        registeel relicanth remoraid rufflet sableye scolipede scrafty seaking sealeo silcoon
-                        simisear snivy snorlax spoink starly tirtouga trapinch treecko tyrogue vigoroth vulpix
-                        wailord wartortle whismur wingull yamask'''
+                        cresselia croagunk darmanitan deino emboar emolga
+                        exeggcute gabite girafarig gulpin haxorus heatmor
+                        heatran ivysaur jellicent jumpluff kangaskhan
+                        kricketune landorus ledyba loudred lumineon lunatone
+                        machamp magnezone mamoswine nosepass petilil pidgeotto
+                        pikachu pinsir poliwrath poochyena porygon2 porygonz
+                        registeel relicanth remoraid rufflet sableye scolipede
+                        scrafty seaking sealeo silcoon simisear snivy snorlax
+                        spoink starly tirtouga trapinch treecko tyrogue
+                        vigoroth vulpix wailord wartortle whismur wingull
+                        yamask'''
 
     pokemon = pokemon_li.strip().lower().split()
 
