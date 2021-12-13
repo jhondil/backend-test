@@ -1,12 +1,12 @@
 import graphene
-from django.db.models import Q
 from graphene_django.filter import DjangoFilterConnectionField
-from graphene_django.types import DjangoObjectType
-from graphql_relay.node.node import from_global_id
 from graphql import GraphQLError
-from .models import Planet, People, Film, Director, Producer
-from .mutations import *
-from .types import PlanetType, PeopleType, FilmType, DirectorType, ProducerType,PeopleFilter
+from .models import People
+from .mutations import CreatePlanet, CreateFilm, CreatePeopleFilm, UpdatePeople
+from .types import (PeopleFilmType,
+                    PlanetType, PeopleType,
+                    FilmType, DirectorType,
+                    ProducerType, PeopleFilter)
 
 
 class Query(graphene.ObjectType):
@@ -14,12 +14,14 @@ class Query(graphene.ObjectType):
     all_planets = DjangoFilterConnectionField(PlanetType)
 
     people = graphene.relay.Node.Field(PeopleType)
-    all_people = DjangoFilterConnectionField(PeopleType, filterset_class=PeopleFilter)
+    all_people = DjangoFilterConnectionField(PeopleType,
+                                             filterset_class=PeopleFilter)
 
     def resolve_all_people(parent, info, gender):
         # returns an object that represents a Person
         if not gender:
-            raise GraphQLError('Valid options are: male, female, hermaphrodite, and n / a.')
+            raise GraphQLError('''Valid options are: male,
+            female, hermaphrodite, and n / a.''')
         else:
             return People.objects.filter(gender__icontains=gender)
 
@@ -29,10 +31,8 @@ class Query(graphene.ObjectType):
     #     # if gender:
     #     #     return People.objects.get(gender)
     #     # else:
-    #     #     raise GraphQLError('Valid options are: male, female, hermaphrodite, and n / a.')
-
-
-
+    #     #     raise GraphQLError('Valid options are: male,
+    # , hermaphrodite, and n / a.')
 
     film = graphene.relay.Node.Field(FilmType)
     all_films = DjangoFilterConnectionField(FilmType)
