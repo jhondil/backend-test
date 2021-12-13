@@ -92,19 +92,19 @@ The service should be available in the URL: `127.0.0.1:8000/graphql`.
 ```
 pytest
 ```
-#Accessing the project in heroku:heavy_check_mark:
+# Accessing the project in heroku:heavy_check_mark:
 Deploy application [app-swapi](https://app-swapi-b.herokuapp.com/explore/)
-###Accessing the project in heroku admin
+### Accessing the project in heroku admin
 Application admin [app-swapi](https://app-swapi-b.herokuapp.com/admin)
-#####User: Admin
-#####Password: Admin
+##### User: Admin
+##### Password: Admin
 
-##Built with :nut_and_bolt:
+## Built with :nut_and_bolt:
 - [Python](https://www.python.org/ "Python")
 - [Django](https://www.djangoproject.com/ "Django")
 - [GraphQl](https://graphql.org/ "GraphQl")
 
-##Authors
+## Authors
 -[ Jhonatan Ibarra ](https://github.com/jhondil/ " Jhonatan Ibarra ")- New implementations
 -[ LQN ](https://github.com/LQNTech/)  - Initial project
 
