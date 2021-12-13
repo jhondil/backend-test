@@ -14,7 +14,6 @@ class SimpleNameModel(models.Model):
 
 
 class Planet(TimeStampedModel, SimpleNameModel):
-    
     """ Planetas del universo de Star Wars """
 
     rotation_period = models.CharField(max_length=40, blank=True)
@@ -45,35 +44,37 @@ class People(TimeStampedModel, SimpleNameModel):
     )
 
     HAIR_COLOR_CHOICES = (
-    ('BLACK', 'black'),
-    ('BROWN', 'brown'),        
-    ('BLONDE', 'blonde'),
-    ('RED', 'red'),
-    ('WHITE', 'white'),
-    ('BALD', 'bald'),
+                         ('BLACK', 'black'),
+                         ('BROWN', 'brown'),
+                         ('BLONDE', 'blonde'),
+                         ('RED', 'red'),
+                         ('WHITE', 'white'),
+                         ('BALD', 'bald'),
     )
 
     EYE_COLOR_CHOICES = (
-    ('BLACK', 'black'),
-    ('BROWN', 'brown'),        
-    ('YELLOW', 'yellow'),
-    ('RED', 'red'),
-    ('GREEN', 'green'),
-    ('PURPLE', 'purple'),
-    ('UNKNOWN', 'unknown'),
+                        ('BLACK', 'black'),
+                        ('BROWN', 'brown'),
+                        ('YELLOW', 'yellow'),
+                        ('RED', 'red'),
+                        ('GREEN', 'green'),
+                        ('PURPLE', 'purple'),
+                        ('UNKNOWN', 'unknown'),
     )
 
     height = models.CharField(max_length=16, blank=True)
     mass = models.CharField(max_length=16, blank=True)
     # hair_color = models.CharField(max_length=32, blank=True)
-    hair_color = models.CharField(max_length=32, choices=HAIR_COLOR_CHOICES, blank=True)
+    hair_color = models.CharField(max_length=32,
+                                  choices=HAIR_COLOR_CHOICES, blank=True)
     skin_color = models.CharField(max_length=32, blank=True)
     # eye_color = models.CharField(max_length=32, blank=True)
-    eye_color = models.CharField(max_length=32, choices=EYE_COLOR_CHOICES, blank=True)
+    eye_color = models.CharField(max_length=32, choices=EYE_COLOR_CHOICES,
+                                 blank=True)
     birth_year = models.CharField(max_length=16, blank=True)
     gender = models.CharField(max_length=64, choices=GENDER)
-    home_world = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='inhabitants')
-
+    home_world = models.ForeignKey(Planet, on_delete=models.CASCADE,
+                                   related_name='inhabitants')
 
     class Meta:
         db_table = 'people'
@@ -98,11 +99,14 @@ class Film(TimeStampedModel):
     title = models.CharField(max_length=100)
     episode_id = models.PositiveSmallIntegerField(null=True)  # TODO: Agregar choices
     opening_crawl = models.TextField(max_length=1000)
-    release_date = models.DateField(blank=True,null=True)
-    director = models.ForeignKey(Director, on_delete=models.CASCADE, related_name='films', blank=True, null=True)
-    producer = models.ManyToManyField(Producer, related_name='films', blank=True)
-    characters = models.ManyToManyField(People, related_name='films', blank=True )
-    planets = models.ManyToManyField(Planet, related_name='films', blank=True )
+    release_date = models.DateField(blank=True, null=True)
+    director = models.ForeignKey(Director, on_delete=models.CASCADE,
+                                 related_name='films', blank=True, null=True)
+    producer = models.ManyToManyField(Producer, related_name='films',
+                                      blank=True)
+    characters = models.ManyToManyField(People, related_name='films',
+                                        blank=True)
+    planets = models.ManyToManyField(Planet, related_name='films', blank=True)
 
     class Meta:
         db_table = 'film'
@@ -112,4 +116,4 @@ class Film(TimeStampedModel):
 
 
 class People_film(People):
-        films = models.ManyToManyField(Film)
+    films = models.ManyToManyField(Film)
