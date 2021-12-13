@@ -46,19 +46,23 @@ source tutorial-env/bin/activate
 - Locate us in the following file swap / settings.py
 		- DEBUG = True  switch to  DEBUG = False
 - uncomment lines 67 to 72
+```
 		DATABASES = {
 		     'default': {
 		         'ENGINE': 'django.db.backends.sqlite3',
 		          'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 		      }
 		 }
-- comment lines 74 to 78
+```
+- comment lines 74 to 
+```
 		# DATABASES = {
 		#     'default': dj_database_url.config(
 		#             default=config('DATABASE_URL')
 		#         )
 		# }
 		
+```
 
 
 
