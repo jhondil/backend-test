@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "4f960831-7894-4575-a3a9-a7303cc979eb",
+		"name": "swapi-back",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get People filter Gender",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 2452abb7e9c7b51403388e0120a7cc70cded6984",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\r\nallPeople(gender:\"\"){\r\n  edges{\r\n    node{\r\n      name\r\n    }\r\n  }\r\n}\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/graphql/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get planets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 2452abb7e9c7b51403388e0120a7cc70cded6984",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\r\n  allPlanets{\r\n    edges{\r\n      node{\r\n        id\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/graphql/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get people and films",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 2452abb7e9c7b51403388e0120a7cc70cded6984",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\r\n  allPeopleFilms{\r\n    edges{\r\n      node{\r\n        name\r\n        films {\r\n          edges {\r\n            node {\r\n              title\r\n            }\r\n          }\r\n        }\r\n      \r\n      }\r\n    }\r\n  }\r\n  \r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/graphql/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add People ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 2452abb7e9c7b51403388e0120a7cc70cded6984",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{\r\n  CreatePeoplefilm(input:{\r\n    name:\"juan juanito\",\r\n    height:\"200\",\r\n    homeWorldId:1,\r\nppFilm:[\r\n  {\r\n  id:2\r\n  },\r\n  {\r\n    id:3\r\n  }\r\n  ,\r\n  {\r\n    id:5\r\n  }\r\n]    \r\n  }){\r\n    PeopleFilms{\r\n      id\r\n      name\r\n    }\r\n  }\r\n  \r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/graphql/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update People ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 2452abb7e9c7b51403388e0120a7cc70cded6984",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "\r\nmutation{\r\n  updatePeoplefilm(id:205 ,input:{\r\n    name:\"Jhonatan ibarra lavado\",\r\n    height:\"2888\",\r\n    homeWorldId:1,\r\nppFilm:[\r\n  {\r\n  id:2\r\n  },\r\n\r\n]    \r\n  }){\r\n    People{\r\n      id\r\n      name\r\n    }\r\n  }\r\n  \r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/graphql/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add film",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 2452abb7e9c7b51403388e0120a7cc70cded6984",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{\r\n  createFilm(input:{\r\n    title: \"nueva film\",\r\n    episodeId:9\r\n  }){\r\n    film{\r\n      title\r\n      id\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/graphql/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
