@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import dj_database_url
 from decouple import config
 
-
 load_dotenv()  # Load env variables
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'Please-generate-a-private key')  # TODO: Generar un key seguro
@@ -64,20 +63,19 @@ GRAPHENE = {
 
 WSGI_APPLICATION = 'swapi.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # DATABASES = {
-#     'default': dj_database_url.config(
-#             default=config('DATABASE_URL')
-#         )
-       
-
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
 # }
+
+
+DATABASES = {
+    'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
