@@ -75,8 +75,6 @@ DATABASES = {
 #     'default': dj_database_url.config(
 #             default=config('DATABASE_URL')
 #         )
-       
-
 # }
 
 AUTH_PASSWORD_VALIDATORS = [
