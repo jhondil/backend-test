@@ -105,6 +105,11 @@ Application admin [app-swapi](https://app-swapi-b.herokuapp.com/admin)
 ##### User: Admin
 ##### Password: Admin
 
+### Collection in Postman
+```
+ file swapi-back.postman_collection.json
+```
+
 ## Built with :nut_and_bolt:
 - [Python](https://www.python.org/ "Python")
 - [Django](https://www.djangoproject.com/ "Django")
