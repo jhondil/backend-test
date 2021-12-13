@@ -145,7 +145,7 @@ class UpdatePeople(graphene.Mutation):
                     return UpdatePeople(movie=None)
                 filmss.append(f)
             p.name = input.name
-            p.height = input.heigh
+            p.height = input.height
             p.save()
             p.films.set(filmss)
             return UpdatePeople(People=p)
