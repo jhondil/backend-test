@@ -1,8 +1,8 @@
 import graphene
 from graphql_relay import from_global_id
 
-from .models import People_film, Planet, People, Film
-from .types import PeopleFilmType, PlanetType, PeopleType, FilmType
+from .models import People_film, Planet, Film
+from .types import PeopleFilmType, PlanetType, FilmType
 from .utils import generic_model_mutation_process
 
 
@@ -50,9 +50,12 @@ class CreatePlanet(graphene.relay.ClientIDMutation):
 #         home_world_id = graphene.Int()
 #         people_film_id = graphene.Int()
 
-#     def mutate(self, info,  name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, home_world_id, people_film_id):
-#         p = People(name=name, height=height, mass=mass, hair_color=hair_color,
-#                    skin_color=skin_color, eye_color=eye_color, birth_year=birth_year, gender=gender)
+#     def mutate(self, info,  name, height, mass, hair_color, skin_color,
+#         eye_color, birth_year, gender, home_world_id, people_film_id):
+#         p = People(name=name, height=height, mass=mass,
+#         hair_color=hair_color,
+#         skin_color=skin_color, eye_color=eye_color,
+#         birth_year=birth_year, gender=gender)
 #         hw = Planet.objects.get(id=home_world_id)
 #         pf = Film.objects.get(id=people_film_id)
 #         p.home_world = hw

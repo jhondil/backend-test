@@ -1,14 +1,15 @@
 import graphene
+import django_filters
 from graphene_django.types import DjangoObjectType
-
-from .models import  Planet, People, Film, Director, Producer,People_film
+from .models import Planet, People, Film, Director, Producer, People_film
 
 
 class PlanetType(DjangoObjectType):
     class Meta:
         model = Planet
         interfaces = (graphene.relay.Node,)
-        filter_fields = {'name': ['iexact', 'icontains', 'contains', 'exact'], }
+        filter_fields = {'name': ['iexact', 'icontains',
+                         'contains', 'exact']}
 
 
 class PeopleType(DjangoObjectType):
@@ -17,8 +18,18 @@ class PeopleType(DjangoObjectType):
     class Meta:
         model = People
         interfaces = (graphene.relay.Node,)
-        filter_fields = {'name': ['iexact', 'icontains', 'contains', 'exact'], 'gender': ['exact']}
-        convert_choices_to_enum = False
+        field = ['gender']
+        filter_fields = {'name': ['iexact', 'icontains',
+                         'contains', 'exact'], 'gender': ['iexact']}
+        convert_choices_to_enum = True
+
+
+class PeopleFilter(django_filters.FilterSet):
+    gender = django_filters.CharFilter()
+
+    class Meta:
+        model = People
+        fields = ['gender']
 
 
 class DirectorType(DjangoObjectType):
@@ -53,6 +64,5 @@ class PeopleFilmType(DjangoObjectType):
     class Meta:
         model = People_film
         interfaces = (graphene.relay.Node,)
-        filter_fields = {'name': ['iexact', 'icontains', 'contains', 'exact'], 'gender': ['exact']}
-
-
+        filter_fields = {'name': ['iexact', 'icontains',
+                         'contains', 'exact'], 'gender': ['exact']}
