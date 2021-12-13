@@ -104,9 +104,9 @@ Application admin [app-swapi](https://app-swapi-b.herokuapp.com/admin)
 - [Django](https://www.djangoproject.com/ "Django")
 - [GraphQl](https://graphql.org/ "GraphQl")
 
-## Authors
--[ Jhonatan Ibarra ](https://github.com/jhondil/ " Jhonatan Ibarra ")- New implementations
--[ LQN ](https://github.com/LQNTech/)  - Initial project
+## Authors:bust_in_silhouette:
+- [ Jhonatan Ibarra ](https://github.com/jhondil/ " Jhonatan Ibarra ")- New implementations
+- [ LQN ](https://github.com/LQNTech/)  - Initial project
 
 
 
