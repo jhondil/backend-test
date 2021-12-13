@@ -1,4 +1,5 @@
 import json
+import pytest
 
 from graphene_django.utils.testing import GraphQLTestCase
 
