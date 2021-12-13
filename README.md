@@ -68,17 +68,19 @@ source tutorial-env/bin/activate
 
 
 
+Move into de repo and install dependencies
+
+```
+pip install -r requirements.txt
+```
+
+
 Run migrations and load fixtures
 ```
 python manage.py migrate
 python manage.py load_fixtures
 ```
 
-Move into de repo and install dependencies
-
-```
-pip install -r requirements.txt
-```
 
 Run migrations and load fixtures
 ```
